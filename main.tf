@@ -7,6 +7,10 @@ terraform {
    }
 }
 
+provider "checkpoint" {
+  # Configuration options
+}
+
 variable "policy_install" {
   type    = bool
   default = false
