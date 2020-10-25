@@ -55,7 +55,7 @@ resource "checkpoint_management_access_rule" "allowrule2" {
                   per_session = true
                   type = "Log"
                   }
-                position = {below = "${checkpoint_management_access_rule.blockrule1.name}"}
+                position = {below = checkpoint_management_access_rule.blockrule1.name}
                 lifecycle {
                    ignore_changes = [action]
                    }
@@ -77,7 +77,7 @@ resource "checkpoint_management_access_rule" "allowrule3" {
                   per_session = true
                   type = "Log"
                   }
-                position = {below = "${checkpoint_management_access_rule.allowrule2.name}"}
+                position = {below = checkpoint_management_access_rule.allowrule2.name}
                 lifecycle {
                    ignore_changes = [action]
                    }

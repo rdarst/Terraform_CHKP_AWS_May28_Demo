@@ -7,7 +7,7 @@
           resource "checkpoint_management_access_rule" "perimeterrule1" {
                 enabled = true
                 name = "Jump Host Rule"
-                source = [ "${checkpoint_management_dns_domain.jumphost.name}"]
+                source = [ checkpoint_management_dns_domain.jumphost.name]
                 service = ["ssh", "https"]
                 action = "Accept"
                 layer = "${checkpoint_management_package.AWS_Perimeter.name} Network"
@@ -22,12 +22,12 @@
                   per_session = true
                   type = "Log"
                   }
-                position = {below = "${checkpoint_management_access_section.jumpsection.name}"}
+                position = {below = checkpoint_management_access_section.jumpsection.name}
                                 }
 
           resource "checkpoint_management_access_section" "accesssection" {
               name = "Perimeter Access"
-              position = {above = "${checkpoint_management_access_rule.perimeterrule2.name}"}
+              position = {above = checkpoint_management_access_rule.perimeterrule2.name}
               layer = "${checkpoint_management_package.AWS_Perimeter.name} Network"
              }
 
@@ -41,7 +41,7 @@
           resource "checkpoint_management_access_rule" "perimeterrule2" {
                 enabled = true
                 name = "Outbound Rule"
-                source = [ "${checkpoint_management_network.vpc_local.name}"]
+                source = [ checkpoint_management_network.vpc_local.name]
                 service = ["ssh", "https", "dns", "http", "ntp", "icmp-proto", "ftp"]
                 action = "Apply Layer"
                 inline_layer = checkpoint_management_access_layer.AWS_Perimeter_URLF.name
@@ -54,7 +54,7 @@
                   per_session = true
                   type = "None"
                   }
-                position = {below = "${checkpoint_management_access_rule.perimeterrule1.name}"}
+                position = {below = checkpoint_management_access_rule.perimeterrule1.name}
                 lifecycle {
                    ignore_changes = [action] 
                 }
