@@ -7,7 +7,7 @@
           resource "checkpoint_management_access_rule" "rule1" {
                 enabled = true
                 name = "Jump Host Rule"
-                source = [ "${checkpoint_management_dns_domain.jumphost.name}"]
+                source = [ checkpoint_management_dns_domain.jumphost.name ]
                 service = ["ssh", "https"]
                 action = "Accept"
                 layer = "${checkpoint_management_package.AWS_AutoScale.name} Network"
@@ -22,13 +22,13 @@
                   per_session = true
                   type = "Log"
                   }
-                position = {below = "${checkpoint_management_access_section.autoscalejumphostsection.name}"}
+                position = {below = checkpoint_management_access_section.autoscalejumphostsection.name}
                                 }
           resource "checkpoint_management_access_rule" "rule2" {
                 name = "Internal Access"
-                destination = ["${checkpoint_management_network.vpc_local.name}"]
+                destination = [checkpoint_management_network.vpc_local.name]
                 destination_negate = false
-                source = ["${checkpoint_management_network.vpc_local.name}"]
+                source = [checkpoint_management_network.vpc_local.name]
                 enabled = true
                 action = "Accept"
                 layer = "${checkpoint_management_package.AWS_AutoScale.name} Network"
@@ -43,12 +43,12 @@
                   per_session = true
                   type = "Log"
                   }
-                position = {below = "${checkpoint_management_access_rule.rule1.name}" }
+                position = {below = checkpoint_management_access_rule.rule1.name }
                     }
 
            resource "checkpoint_management_access_rule" "rule3" {
                 name = "Internet Access"
-                source = ["${checkpoint_management_network.vpc_local.name}"]
+                source = [checkpoint_management_network.vpc_local.name]
                 enabled = true
                 action = "Accept"
                 layer = "${checkpoint_management_package.AWS_AutoScale.name} Network"
@@ -63,13 +63,13 @@
                   per_session = true
                   type = "Log"
                   }
-                position = {below = "${checkpoint_management_access_rule.rule2.name}"}
+                position = {below = checkpoint_management_access_rule.rule2.name}
                     }
 
           resource "checkpoint_management_access_rule" "rule4" {
                 name = "Inbound Access"
-                destination = ["${checkpoint_management_dynamic_object.localgatewayexternal.name}"]
-                service = [ "${checkpoint_management_service_tcp.tcp8090.name}", "${checkpoint_management_service_tcp.tcp33890.name}"]
+                destination = [checkpoint_management_dynamic_object.localgatewayexternal.name]
+                service = [ checkpoint_management_service_tcp.tcp8090.name, checkpoint_management_service_tcp.tcp33890.name]
                 enabled = true
                 action = "Accept"
                 layer = "${checkpoint_management_package.AWS_AutoScale.name} Network"
@@ -84,7 +84,7 @@
                   per_session = true
                   type = "Log"
                   }
-                position = {below = "${checkpoint_management_access_rule.rule3.name}"}
+                position = {below = checkpoint_management_access_rule.rule3.name}
                 }
 
           resource "checkpoint_management_access_section" "autoscalecleanupsection" {
