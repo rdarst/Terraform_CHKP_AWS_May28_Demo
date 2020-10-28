@@ -5,6 +5,4 @@ Source your credentials for the SmartCenter or MDS using the example creds file.
 
 On unix/linux run:  source creds_MDS
 
-To have the publish resource run on the apply, taint the publish resource before the apply is run. This will force the publish to be created on every apply. For Example run the following
-
-terraform taint checkpoint_management_publish.publish; terraform apply
+The recommended way to publish the changes is to use the publish executable from the Check Point provider source code to publish the changes.  See https://registry.terraform.io/providers/CheckPointSW/checkpoint/latest/docs#publish for details.
