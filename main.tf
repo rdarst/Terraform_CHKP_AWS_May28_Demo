@@ -37,3 +37,6 @@ resource "null_resource" "installpolicy" {
 }
 depends_on = [checkpoint_management_publish.publish]
 }
+resource "checkpoint_management_logout" "logout" {
+  depends_on = [checkpoint_management_publish.publish]
+}
