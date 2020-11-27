@@ -1,1 +1,2 @@
 terraform taint checkpoint_management_publish.publish
+terraform taint checkpoint_management_logout.logout
